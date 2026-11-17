@@ -73,6 +73,7 @@ button{cursor:pointer}
 .brand .mini{width:42px;height:42px;font-size:22px;border-width:2px}
 .brand .mini::after{display:none}
 .bar .sp{flex:1}
+.homebtn svg{width:1.15em;height:1.15em}
 .pill{border:2px solid rgba(255,255,255,.7);border-radius:999px;padding:.35em .95em;font-weight:700;font-size:16px;font-variant-numeric:tabular-nums}
 .ibtn{border:2px solid rgba(255,255,255,.75);background:rgba(255,255,255,.12);border-radius:999px;padding:.4em .95em;font-weight:700;font-size:16px;display:inline-flex;align-items:center;gap:.35em}
 .ibtn:hover{background:rgba(255,255,255,.25)}
@@ -104,7 +105,7 @@ button{cursor:pointer}
 .p-head .outline{display:block;font-size:clamp(24px,2.8vw,34px)}
 .p-head .tall{display:block;font-family:var(--f-display);font-size:clamp(46px,6vw,78px)}
 .photo{position:relative;border-radius:var(--r);overflow:hidden;border:8px solid #fff;background:#fff;box-shadow:0 22px 44px rgba(15,40,20,.28);aspect-ratio:4/3.4;max-width:100%}
-.photo img{width:100%;height:100%;object-fit:cover;transition:filter .8s ease,transform .8s ease;display:block}
+.photo img{width:100%;height:100%;object-fit:contain;background:#fff;transition:transform 1.6s ease-in-out;display:block}
 .photo .num{position:absolute;left:10px;top:10px;background:var(--ink);color:#fff;border-radius:999px;padding:.2em .8em;font-weight:900;font-size:17px;font-variant-numeric:tabular-nums}
 .hpanel{padding:clamp(18px,2.4vw,30px);display:flex;flex-direction:column;gap:14px}
 .hpanel h2{margin:0;font-family:var(--f-hand);font-weight:700;font-size:clamp(28px,3vw,40px);line-height:1.2}
@@ -154,9 +155,9 @@ button{cursor:pointer}
 .persona{padding:20px 24px;font-family:var(--f-hand);font-size:clamp(20px,2.1vw,25px);line-height:1.65}
 .persona .ribbon{font-family:var(--f-body);margin-bottom:8px}
 .statnote{grid-column:1/-1;text-align:center;font-size:13px;opacity:.85}
-.bigphoto{position:relative;border-radius:var(--r);overflow:hidden;border:8px solid #fff;box-shadow:0 22px 44px rgba(15,40,20,.28)}
-.bigphoto img{display:block;width:100%;max-height:72vh;object-fit:cover;object-position:center 30%}
-.bigphoto .quirk{position:absolute;left:0;right:0;bottom:0;padding:60px 22px 18px;background:linear-gradient(180deg,transparent,rgba(12,30,15,.78));text-align:center}
+.bigphoto{position:relative;align-self:center;width:fit-content;max-width:100%;margin:0;border-radius:var(--r);overflow:hidden;border:8px solid #fff;background:#fff;box-shadow:0 22px 44px rgba(15,40,20,.28)}
+.bigphoto img{display:block;width:auto;height:auto;max-width:100%;max-height:78vh;object-fit:contain;margin:0 auto}
+.bigphoto .quirk{position:static;padding:14px 22px 16px;background:var(--ink);color:#fff;text-align:center}
 .bigphoto .quirk p{margin:8px 0 0;font-family:var(--f-hand);font-size:clamp(20px,2.3vw,28px);line-height:1.45}
 .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
 .card{padding:clamp(18px,2.4vw,28px)}
@@ -273,11 +274,12 @@ table.cr th{color:var(--ink)}
     <div class="h-sub shadow-txt"><span class="en">WHO AM I ?</span><span class="hand">21 位狗朋友・猜猜我是誰</span></div>
     <p class="lede panel">看照片，按按鈕一個一個打開提示：體型、毛色、耳朵尾巴、原本的工作……大家猜到了再揭曉，一起聊聊「以前家裡養過的狗」。還有台灣犬、米克斯和真實的狗叫聲。</p>
     <div class="h-actions">
-      <button class="btn" data-go="start"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>開始猜狗狗</button>
+      <button class="btn" data-go="start"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg><span data-startlbl>開始猜狗狗</span></button>
+      <button class="btn line" data-go="restart" id="restartBtn" hidden>從頭重新猜</button>
       <button class="btn line" data-go="gallery">狗朋友圖鑑</button>
     </div>
     <div class="opts shadow-txt">
-      <span>玩法 <span class="seg" id="segMode"><button data-v="see" class="on">看照片猜</button><button data-v="blur">模糊照片</button><button data-v="zoom">放大局部</button></span></span>
+      <span>玩法 <span class="seg" id="segMode"><button data-v="see" class="on">看照片猜</button><button data-v="zoom">從頭部慢慢拉遠</button></span></span>
       <span>順序 <span class="seg" id="segOrder"><button data-v="seq" class="on">依序</button><button data-v="rand">隨機</button></span></span>
     </div>
     <div class="parade" id="parade" aria-label="從某一隻開始"></div>
@@ -293,7 +295,7 @@ table.cr th{color:var(--ink)}
 <section class="view" id="quiz">
   <div class="wrap">
     <div class="bar shadow-txt">
-      <button class="brand" data-go="home" aria-label="回首頁"><span class="hi mini">hi.</span>狗狗品種猜猜看</button>
+      <button class="ibtn homebtn" data-go="home" aria-label="回首頁"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg><span>首頁</span></button><button class="brand hide-s" data-go="home" aria-label="回首頁"><span class="hi mini">hi.</span>狗狗品種猜猜看</button>
       <span class="sp"></span>
       <span class="pill" id="qProg">1 / 21</span>
       <button class="ibtn" id="qPrev" aria-label="上一隻"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg><span class="hide-s">上一隻</span></button>
@@ -323,7 +325,7 @@ table.cr th{color:var(--ink)}
 <section class="view" id="answer">
   <div class="wrap">
     <div class="bar shadow-txt">
-      <button class="brand" data-go="home" aria-label="回首頁"><span class="hi mini">hi.</span>狗狗品種猜猜看</button>
+      <button class="ibtn homebtn" data-go="home" aria-label="回首頁"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg><span>首頁</span></button><button class="brand hide-s" data-go="home" aria-label="回首頁"><span class="hi mini">hi.</span>狗狗品種猜猜看</button>
       <span class="sp"></span>
       <span class="pill" id="aProg">1 / 21</span>
       <button class="ibtn" id="aBack"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg><span class="hide-s">回到提示</span></button>
@@ -337,9 +339,9 @@ table.cr th{color:var(--ink)}
 <section class="view" id="gallery">
   <div class="wrap">
     <div class="bar shadow-txt">
-      <button class="brand" data-go="home" aria-label="回首頁"><span class="hi mini">hi.</span>狗狗品種猜猜看</button>
+      <button class="ibtn homebtn" data-go="home" aria-label="回首頁"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg><span>首頁</span></button><button class="brand hide-s" data-go="home" aria-label="回首頁"><span class="hi mini">hi.</span>狗狗品種猜猜看</button>
       <span class="sp"></span>
-      <button class="btn small" data-go="start">開始猜狗狗</button>
+      <button class="btn small" data-go="start" data-startlbl>開始猜狗狗</button>
     </div>
     <div class="ptitle shadow-txt"><div class="stack"><span class="outline">21 位</span><span class="tall">狗朋友圖鑑</span></div></div>
     <div class="filters"><span class="seg" id="gFilter"><button data-v="all" class="on">全部</button><button data-v="local">台灣在地</button><button data-v="small">小型犬</button><button data-v="medium">中型犬</button><button data-v="large">大型犬</button></span></div>
@@ -352,9 +354,9 @@ table.cr th{color:var(--ink)}
 <section class="view" id="sounds">
   <div class="wrap">
     <div class="bar shadow-txt">
-      <button class="brand" data-go="home" aria-label="回首頁"><span class="hi mini">hi.</span>狗狗品種猜猜看</button>
+      <button class="ibtn homebtn" data-go="home" aria-label="回首頁"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg><span>首頁</span></button><button class="brand hide-s" data-go="home" aria-label="回首頁"><span class="hi mini">hi.</span>狗狗品種猜猜看</button>
       <span class="sp"></span>
-      <button class="btn small" data-go="start">開始猜狗狗</button>
+      <button class="btn small" data-go="start" data-startlbl>開始猜狗狗</button>
     </div>
     <div class="ptitle shadow-txt"><div class="hi">汪!</div><div class="stack"><span class="outline">聽聽看</span><span class="tall">狗狗會怎麼叫</span></div></div>
     <p class="lead panel">有沒有「每一種狗的叫聲」資料庫？<b>沒有完整的。</b>大部分品種的叫聲其實差不多，差別主要在<b>體型</b>：小狗聲音高、尖，大狗聲音低、厚。真正特別的只有少數幾種，例如<b>巴仙吉</b>不汪汪叫、會「約德爾」，<b>哈士奇</b>愛嚎叫和「講話」，<b>米格魯</b>會拉長音「長吠」。下面的錄音都來自維基共享資源（Wikimedia Commons），是真實錄到的狗叫聲，沒有任何合成。</p>
@@ -376,9 +378,9 @@ table.cr th{color:var(--ink)}
 <section class="view" id="adopt">
   <div class="wrap">
     <div class="bar shadow-txt">
-      <button class="brand" data-go="home" aria-label="回首頁"><span class="hi mini">hi.</span>狗狗品種猜猜看</button>
+      <button class="ibtn homebtn" data-go="home" aria-label="回首頁"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg><span>首頁</span></button><button class="brand hide-s" data-go="home" aria-label="回首頁"><span class="hi mini">hi.</span>狗狗品種猜猜看</button>
       <span class="sp"></span>
-      <button class="btn small" data-go="start">開始猜狗狗</button>
+      <button class="btn small" data-go="start" data-startlbl>開始猜狗狗</button>
     </div>
     <div class="ptitle shadow-txt"><div class="hi">♥</div><div class="stack"><span class="outline">ADOPT ME!</span><span class="tall">領養代替購買</span></div></div>
     <div class="stack-gap">
@@ -415,9 +417,9 @@ table.cr th{color:var(--ink)}
 <section class="view" id="guide">
   <div class="wrap">
     <div class="bar shadow-txt">
-      <button class="brand" data-go="home" aria-label="回首頁"><span class="hi mini">hi.</span>狗狗品種猜猜看</button>
+      <button class="ibtn homebtn" data-go="home" aria-label="回首頁"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg><span>首頁</span></button><button class="brand hide-s" data-go="home" aria-label="回首頁"><span class="hi mini">hi.</span>狗狗品種猜猜看</button>
       <span class="sp"></span>
-      <button class="btn small" data-go="start">開始猜狗狗</button>
+      <button class="btn small" data-go="start" data-startlbl>開始猜狗狗</button>
     </div>
     <div class="ptitle shadow-txt"><div class="stack"><span class="outline">給帶領者的</span><span class="tall">活動說明</span></div></div>
     <div class="stack-gap">
@@ -475,12 +477,14 @@ const host=location.hostname;
 const CAN_EMBED=/github\.io$/.test(host)||host==="localhost"||host==="127.0.0.1";
 const SIZE={small:"小型犬",medium:"中型犬",large:"大型犬"};
 const img=k=>"assets/img/"+k+".jpg";
+const FOCUS={akita:"35% 30%",basenji:"72% 30%",beagle:"14% 35%",bichon:"62% 40%",border:"82% 25%",chihuahua:"24% 25%",corgi:"30% 40%",dachshund:"82% 45%",dalmatian:"50% 30%",frenchie:"30% 40%",golden:"80% 35%",gsd:"20% 30%",husky:"86% 25%",lab:"14% 35%",mutt:"40% 25%",pom:"30% 35%",poodle:"50% 60%",pug:"20% 25%",schnauzer:"28% 30%",shiba:"30% 35%",taiwan:"30% 50%"};
+const fp=k=>` style="object-position:${FOCUS[k]||"center"}"`;
 const ICON_EXT='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5"/></svg>';
 const PLAY='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>', PAUSE='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';
 const PAW='<svg viewBox="0 0 24 24" fill="currentColor"><ellipse cx="12" cy="16" rx="5" ry="4.2"/><circle cx="5.5" cy="10" r="2.2"/><circle cx="9.5" cy="6" r="2.2"/><circle cx="14.5" cy="6" r="2.2"/><circle cx="18.5" cy="10" r="2.2"/></svg>';
 
 /* ---------- 狀態 ---------- */
-const st={mode:store.get("mode","see"),order:store.get("order","seq"),list:D.map((_,i)=>i),pos:0,used:[],filter:"all"};
+const st={mode:store.get("mode","see")==="zoom"?"zoom":"see",order:store.get("order","seq"),list:D.map((_,i)=>i),pos:0,used:[],filter:"all",started:false,last:"quiz",listFilter:"all"};
 function segInit(id,key){$$(`#${id} button`).forEach(b=>{b.classList.toggle("on",b.dataset.v===st[key]);b.onclick=()=>{st[key]=b.dataset.v;store.set(key,st[key]);$$(`#${id} button`).forEach(x=>x.classList.toggle("on",x===b))}})}
 segInit("segMode","mode"); segInit("segOrder","order");
 const inFilter=d=>st.filter==="all"||(st.filter==="local"?d.local:d.size===st.filter);
@@ -489,11 +493,17 @@ function buildList(startKey){
   let idx=D.map((d,i)=>i).filter(i=>inFilter(D[i]));
   if(st.order==="rand") shuffle(idx);
   if(startKey){const k=D.findIndex(d=>d.key===startKey);idx=idx.filter(i=>i!==k);idx.unshift(k)}
-  st.list=idx; st.pos=0;
+  st.list=idx; st.pos=0; st.started=true; st.listFilter=st.filter;
 }
 
 /* ---------- 換頁 ---------- */
+function resume(){ show(st.last==="answer"&&$("#ansBody").dataset.k===cur().key?"answer":"quiz"); history.replaceState(null,"","#"+cur().key) }
+function syncStart(){
+  const t=st.started?`繼續猜（第 ${st.pos+1} / ${st.list.length} 隻）`:"開始猜狗狗";
+  $$("[data-startlbl]").forEach(e=>e.textContent=t); $("#restartBtn").hidden=!st.started;
+}
 function show(id){
+  if(id==="quiz"||id==="answer") st.last=id; else syncStart();
   $$(".view").forEach(v=>v.classList.toggle("on",v.id===id));
   scrollTo(0,0); stopAudio();
   if(["home","gallery","sounds","adopt","guide"].includes(id)) history.replaceState(null,"",location.pathname+location.search+(id==="home"?"":"#"+id));
@@ -501,7 +511,12 @@ function show(id){
 document.addEventListener("click",e=>{
   const g=e.target.closest("[data-go]"); if(!g) return;
   const v=g.dataset.go;
-  if(v==="start"){ if(!$("#gallery").classList.contains("on")) st.filter="all"; buildList(); openQuiz(); }
+  if(v==="start"){
+    const inGal=$("#gallery").classList.contains("on");
+    if(st.started&&(!inGal||st.filter===st.listFilter)){resume();return}
+    if(!inGal) st.filter="all"; buildList(); openQuiz();
+  }
+  else if(v==="restart"){ st.filter="all"; buildList(); openQuiz(); }
   else { show(v); if(v==="gallery") renderGallery(); }
 });
 
@@ -543,9 +558,9 @@ const HINTS=[
 const cur=()=>D[st.list[st.pos]];
 function photoFx(){
   const im=$("#qImg"), n=st.used.filter(k=>k!=="choice").length;
-  if(st.mode==="blur"){const px=[24,18,13,9,5,2,0,0][Math.min(n,7)];im.style.filter=px?`blur(${px}px)`:"none";im.style.transform=px?"scale(1.1)":"none"}
-  else if(st.mode==="zoom"){const z=[3.2,2.6,2.1,1.7,1.4,1.15,1,1][Math.min(n,7)];im.style.filter="none";im.style.transform=`scale(${z})`}
-  else{im.style.filter="none";im.style.transform="none"}
+  im.style.filter="none"; im.style.transformOrigin=FOCUS[cur().key]||"center";
+  if(st.mode==="zoom"){const z=[2.1,1.85,1.62,1.43,1.27,1.13,1,1][Math.min(n,7)];im.style.transform=`scale(${z})`}
+  else im.style.transform="none";
 }
 function openQuiz(){
   const d=cur(); st.used=[]; stopAudio();
@@ -601,15 +616,17 @@ function showAnswer(){
   if(mySnd.length||myVid.length){
     soundBlock=`<div class="card"><h3>${PAW}聽聽牠的聲音</h3><div style="display:flex;flex-direction:column;gap:12px">${mySnd.map(x=>playerHTML(x)+`<p class="credit">${srcLine(x.key)}</p>`).join("")}${myVid.map(v=>`<p>${esc(v.note)}</p><div class="vids" style="grid-template-columns:1fr;margin-top:0">${vidHTML(v)}</div>`).join("")}</div></div>`;
   } else {
-    soundBlock=`<div class="card"><h3>${PAW}牠怎麼叫？</h3><p>${esc(d.name)}的叫聲跟大部分狗狗差不多：${d.size==="small"?"小型犬聲音比較高、比較尖":d.size==="large"?"大型犬聲音比較低、比較厚":"中型犬聲音不高也不低"}。到「狗狗會怎麼叫」可以聽汪汪叫、嚎叫、嗚嗚哭和低吼的真實錄音。</p><div class="linkrow" style="margin-top:12px"><button class="chip" data-go="sounds">狗狗會怎麼叫 →</button></div></div>`;
+    soundBlock=`<div class="card"><h3>${PAW}牠怎麼叫？</h3><p>${esc(d.name)}的叫聲跟大部分狗狗差不多：${d.size==="small"?"小型犬聲音比較高、比較尖":d.size==="large"?"大型犬聲音比較低、比較厚":"中型犬聲音不高也不低"}。先聽聽看${d.size==="small"?"小型犬":"大型犬"}的汪汪叫：</p><div style="margin-top:12px">${(()=>{const x=SND.find(z=>z.key===(d.size==="small"?"bark_small":"bark_big"));return playerHTML(x)+`<p class="credit">${srcLine(x.key)}</p>`})()}</div><p style="margin-top:10px;font-size:16px;opacity:.8">嚎叫、嗚嗚哭、低吼等其他叫聲，在首頁的「狗狗會怎麼叫？」。</p></div>`;
   }
   const lic=m.img.licurl?`<a href="${m.img.licurl}" target="_blank" rel="noopener">${esc(m.img.lic)}</a>`:esc(m.img.lic);
   const q=encodeURIComponent(d.name+(d.key==="mutt"?" 狗":" 狗 品種"));
+  $("#ansBody").dataset.k=d.key;
   $("#ansBody").innerHTML=`
   <div class="a-head shadow-txt">
     <div class="hi">hi.</div>
     <div class="stack"><div class="praise">${esc(praise)}</div><span class="outline">我的名字是</span><span class="tall">${esc(d.name)}</span><span class="en">${esc(d.en)}</span>${d.alias?`<div class="alias">也叫：${esc(d.alias)}</div>`:""}</div>
   </div>
+  <div class="bigphoto"><img src="${img(d.key)}" alt="${esc(d.name)}"><div class="quirk"><span class="ribbon">CUTE QUIRK 可愛小習慣</span><p>${esc(d.quirk)}</p></div></div>
   <div class="info">
     <div class="panel facts-grid">
       <div class="fcell"><span class="ribbon">HOME 老家</span><span class="v">${esc(d.origin)}</span></div>
@@ -629,7 +646,6 @@ function showAnswer(){
       <div class="panel persona"><span class="ribbon">PERSONALITY 個性</span><div>${esc(d.personality)}</div></div>
     </div>
   </div>
-  <div class="bigphoto"><img src="${img(d.key)}" alt="${esc(d.name)}"><div class="quirk"><span class="ribbon">CUTE QUIRK 可愛小習慣</span><p>${esc(d.quirk)}</p></div></div>
   <div class="cards">
     <div class="card"><h3>${PAW}照顧重點</h3><div class="care"><div><b>運動</b><p>${esc(d.exercise)}</p></div><div><b>梳毛美容</b><p>${esc(d.grooming)}</p></div><div><b>常見健康</b><p>${esc(d.health)}</p></div></div></div>
     <div class="card"><h3>${PAW}有趣小知識</h3><ul class="flist">${d.facts.map(f=>`<li><span>${esc(f)}</span></li>`).join("")}</ul></div>
@@ -641,7 +657,7 @@ function showAnswer(){
       <a class="chip" href="https://www.google.com/search?tbm=isch&q=${q}" target="_blank" rel="noopener">${ICON_EXT}Google 圖片</a>
       <a class="chip" href="https://www.youtube.com/results?search_query=${encodeURIComponent(d.name+" #shorts")}" target="_blank" rel="noopener">${ICON_EXT}YouTube 短影音</a>
       <a class="chip" href="https://zh.wikipedia.org/w/index.php?variant=zh-tw&search=${encodeURIComponent(d.name)}" target="_blank" rel="noopener">${ICON_EXT}維基百科</a>
-      <button class="chip" data-go="adopt">${PAW}領養代替購買</button>
+      <a class="chip" href="https://animal.moa.gov.tw/" target="_blank" rel="noopener">${ICON_EXT}領養代替購買</a>
     </div>
     <div class="vids">${m.yt.map(vidHTML).join("")}</div>
     <p class="credit" style="margin-top:12px">照片：${esc(m.img.author)}，${lic}，<a href="${m.img.page}" target="_blank" rel="noopener">Wikimedia Commons</a></p>
@@ -658,10 +674,10 @@ function showAnswer(){
 /* ---------- 圖鑑 ---------- */
 function renderGallery(){
   $$("#gFilter button").forEach(x=>{x.classList.toggle("on",x.dataset.v===st.filter);x.onclick=()=>{st.filter=x.dataset.v;renderGallery()}});
-  $("#gGrid").innerHTML=D.filter(inFilter).map(d=>`<button class="gitem" data-k="${d.key}"><img src="${img(d.key)}" alt="" loading="lazy"><b>${esc(d.name)}</b><span>${esc(d.en.split(" (")[0])}</span>${d.local?'<span class="tw">台灣在地</span>':""}</button>`).join("");
+  $("#gGrid").innerHTML=D.filter(inFilter).map(d=>`<button class="gitem" data-k="${d.key}"><img src="${img(d.key)}"${fp(d.key)} alt="" loading="lazy"><b>${esc(d.name)}</b><span>${esc(d.en.split(" (")[0])}</span>${d.local?'<span class="tw">台灣在地</span>':""}</button>`).join("");
   $$("#gGrid .gitem").forEach(x=>x.onclick=()=>{buildList(x.dataset.k);openQuiz()});
 }
-$("#parade").innerHTML=D.map(d=>`<button data-k="${d.key}" aria-label="從${esc(d.name)}開始猜"><img src="${img(d.key)}" alt="" loading="lazy"></button>`).join("");
+$("#parade").innerHTML=D.map(d=>`<button data-k="${d.key}" aria-label="從${esc(d.name)}開始猜"><img src="${img(d.key)}"${fp(d.key)} alt="" loading="lazy"></button>`).join("");
 $$("#parade button").forEach(b=>b.onclick=()=>{st.filter="all";buildList(b.dataset.k);openQuiz()});
 
 /* ---------- 叫聲頁 ---------- */
@@ -690,7 +706,9 @@ addEventListener("keydown",e=>{
 function fromHash(){
   const h=decodeURIComponent(location.hash.slice(1));
   if(["gallery","sounds","adopt","guide"].includes(h)){ if(!$("#"+h).classList.contains("on")){show(h);if(h==="gallery")renderGallery()} return }
-  if(h&&D.some(d=>d.key===h)&&!(st.list.length&&cur().key===h&&!$("#home").classList.contains("on"))){buildList(h);openQuiz()}
+  if(!h||!D.some(d=>d.key===h)) return;
+  if(st.started&&cur().key===h){ if(!$("#quiz").classList.contains("on")&&!$("#answer").classList.contains("on")) resume(); return }
+  buildList(h);openQuiz()
 }
 fromHash(); addEventListener("hashchange",fromHash);
 })();
