@@ -116,9 +116,15 @@ button{cursor:pointer}
 .hbtn:hover{background:rgba(255,255,255,.25)}
 .hbtn.used{background:#fff;color:var(--ink)}
 .hbtn.wide{grid-column:span 2;flex-direction:row;justify-content:center;gap:.5em}
-.hints{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
-.hints li{display:grid;grid-template-columns:auto 1fr;gap:10px 14px;align-items:start;padding:12px 0;border-top:2.5px dotted rgba(255,255,255,.6);animation:pop .35s ease}
-.hints li:first-child{border-top:0}
+.hints{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.hints li{flex:1 1 100%;display:grid;grid-template-columns:auto 1fr;gap:10px 14px;align-items:start;padding:12px 0 4px;border-top:2.5px dotted rgba(255,255,255,.6);animation:pop .35s ease}
+.hints li.closed{flex:0 0 auto;display:block;padding:0;border:0;animation:none}
+.hints li.closed .v{display:none}
+.hints li .ribbon{cursor:pointer}
+.hints li.closed .ribbon{margin:0;opacity:.85}
+.hints li.closed .ribbon:hover{opacity:1}
+.hints li:not(.closed){order:99}
+.hints li:first-child:not(.closed){border-top:0}
 .hints li .ribbon{margin-top:.3em}
 .hints li .v{font-family:var(--f-hand);font-size:clamp(21px,2.2vw,27px);line-height:1.5}
 .choices{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
@@ -279,7 +285,7 @@ table.cr th{color:var(--ink)}
       <button class="btn line" data-go="gallery">狗朋友圖鑑</button>
     </div>
     <div class="opts shadow-txt">
-      <span>玩法 <span class="seg" id="segMode"><button data-v="see" class="on">看照片猜</button><button data-v="zoom">從頭部慢慢拉遠</button></span></span>
+      <span>玩法 <span class="seg" id="segMode"><button data-v="see" class="on">看照片猜</button><button data-v="zoom">只看頭，慢慢拉遠</button></span></span>
       <span>順序 <span class="seg" id="segOrder"><button data-v="seq" class="on">依序</button><button data-v="rand">隨機</button></span></span>
     </div>
     <div class="parade" id="parade" aria-label="從某一隻開始"></div>
@@ -477,7 +483,8 @@ const host=location.hostname;
 const CAN_EMBED=/github\.io$/.test(host)||host==="localhost"||host==="127.0.0.1";
 const SIZE={small:"小型犬",medium:"中型犬",large:"大型犬"};
 const img=k=>"assets/img/"+k+".jpg";
-const FOCUS={akita:"35% 30%",basenji:"72% 30%",beagle:"14% 35%",bichon:"62% 40%",border:"82% 25%",chihuahua:"24% 25%",corgi:"30% 40%",dachshund:"82% 45%",dalmatian:"50% 30%",frenchie:"30% 40%",golden:"80% 35%",gsd:"20% 30%",husky:"86% 25%",lab:"14% 35%",mutt:"40% 25%",pom:"30% 35%",poodle:"50% 60%",pug:"20% 25%",schnauzer:"28% 30%",shiba:"30% 35%",taiwan:"30% 50%"};
+const HEAD={akita:[0.43,0.25,0.22],basenji:[0.78,0.22,0.26],beagle:[0.17,0.33,0.25],bichon:[0.66,0.33,0.32],border:[0.81,0.22,0.28],chihuahua:[0.25,0.23,0.26],corgi:[0.33,0.4,0.22],dachshund:[0.78,0.27,0.3],dalmatian:[0.62,0.22,0.38],frenchie:[0.35,0.37,0.32],golden:[0.87,0.19,0.22],gsd:[0.17,0.26,0.22],husky:[0.86,0.23,0.2],lab:[0.16,0.26,0.22],mutt:[0.46,0.33,0.47],pom:[0.26,0.3,0.27],poodle:[0.79,0.48,0.25],pug:[0.21,0.21,0.37],schnauzer:[0.28,0.32,0.24],shiba:[0.29,0.26,0.22],taiwan:[0.26,0.45,0.27]};
+const FOCUS={akita:"43% 25%",basenji:"78% 22%",beagle:"17% 33%",bichon:"66% 33%",border:"81% 22%",chihuahua:"25% 23%",corgi:"33% 40%",dachshund:"78% 27%",dalmatian:"62% 22%",frenchie:"35% 37%",golden:"87% 19%",gsd:"17% 26%",husky:"86% 23%",lab:"16% 26%",mutt:"46% 33%",pom:"26% 30%",poodle:"79% 48%",pug:"21% 21%",schnauzer:"28% 32%",shiba:"29% 26%",taiwan:"26% 45%"};
 const fp=k=>` style="object-position:${FOCUS[k]||"center"}"`;
 const ICON_EXT='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5"/></svg>';
 const PLAY='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>', PAUSE='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';
@@ -558,13 +565,20 @@ const HINTS=[
 const cur=()=>D[st.list[st.pos]];
 function photoFx(){
   const im=$("#qImg"), n=st.used.filter(k=>k!=="choice").length;
-  im.style.filter="none"; im.style.transformOrigin=FOCUS[cur().key]||"center";
-  if(st.mode==="zoom"){const z=[2.1,1.85,1.62,1.43,1.27,1.13,1,1][Math.min(n,7)];im.style.transform=`scale(${z})`}
-  else im.style.transform="none";
+  im.style.filter="none"; im.style.transformOrigin="0 0";
+  if(st.mode!=="zoom"||!im.naturalWidth){im.style.transform="none";return}
+  const bw=im.clientWidth, bh=im.clientHeight, r=Math.min(bw/im.naturalWidth,bh/im.naturalHeight);
+  const cw=im.naturalWidth*r, ch=im.naturalHeight*r, ox=(bw-cw)/2, oy=(bh-ch)/2;
+  const [hx,hy,hw]=HEAD[cur().key]||[.5,.4,.3];
+  const z0=Math.max(1,Math.min(7,0.8*bw/(hw*cw)));            // 頭部大約佔滿畫面
+  const t=Math.min(n,6)/6, z=Math.pow(z0,1-t);                 // 每個提示拉遠一點，第 6 個看到整隻
+  const fit=(box,o,c,h)=>{let v=box/2-z*(o+h*c); if(z*c>=box){v=Math.min(-z*o,Math.max(box-z*(o+c),v))}else{v=box/2-z*(o+c/2)} return v};
+  im.style.transform=`translate(${fit(bw,ox,cw,hx).toFixed(1)}px,${fit(bh,oy,ch,hy).toFixed(1)}px) scale(${z.toFixed(3)})`;
 }
+
 function openQuiz(){
   const d=cur(); st.used=[]; stopAudio();
-  const im=$("#qImg"); im.style.transition="none"; im.src=img(d.key); photoFx(); void im.offsetWidth; im.style.transition="";
+  const im=$("#qImg"); im.style.transition="none"; const fresh=!im.src.endsWith(img(d.key)); if(fresh) im.style.opacity=0; im.onload=()=>{im.style.transition="none";photoFx();void im.offsetWidth;im.style.opacity="";im.style.transition=""}; im.src=img(d.key); photoFx(); void im.offsetWidth; im.style.transition="";
   const prog=`${st.pos+1} / ${st.list.length}`;
   $("#qProg").textContent=prog; $("#qNum").textContent="第 "+prog;
   $("#hintList").innerHTML=""; $("#emptyTip").hidden=false;
@@ -580,8 +594,11 @@ function reveal(k){
   if(k==="len"){const c=[...d.name];html=`名字有 <b>${c.length}</b> 個字，第一個字是「<b>${esc(c[0])}</b>」。`}
   else if(k==="choice"){html=`是哪一個？<div class="choices">${choicesFor(d).map(n=>`<button data-c="${esc(n)}">${esc(n)}</button>`).join("")}</div>`}
   else html=esc(d.hints[k]);
+  $$("#hintList li").forEach(x=>x.classList.add("closed"));
   const li=document.createElement("li");
-  li.innerHTML=`<span class="ribbon">${h?h.tag:"CHOOSE 選一個"}</span><div class="v">${html}</div>`;
+  li.innerHTML=`<span class="ribbon" role="button" tabindex="0" title="按一下打開／收起">${h?h.tag:"CHOOSE 選一個"}</span><div class="v">${html}</div>`;
+  const rb=li.querySelector(".ribbon"), tg=()=>{const wasClosed=li.classList.contains("closed");$$("#hintList li").forEach(x=>x.classList.add("closed"));if(wasClosed)li.classList.remove("closed")};
+  rb.onclick=tg; rb.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();e.stopPropagation();tg()}};
   $("#hintList").appendChild(li);
   li.querySelectorAll(".choices button").forEach(c=>c.onclick=()=>{if(c.dataset.c===d.name){c.classList.add("right");setTimeout(showAnswer,700)}else c.classList.add("wrong")});
   li.scrollIntoView({block:"nearest",behavior:"smooth"});
@@ -711,6 +728,7 @@ function fromHash(){
   buildList(h);openQuiz()
 }
 fromHash(); addEventListener("hashchange",fromHash);
+addEventListener("resize",()=>{if($("#quiz").classList.contains("on"))photoFx()});
 })();
 </script>
 </body>
