@@ -106,6 +106,16 @@ button{cursor:pointer}
 .p-head .tall{display:block;font-family:var(--f-display);font-size:clamp(46px,6vw,78px)}
 .photo{position:relative;border-radius:var(--r);overflow:hidden;border:8px solid #fff;background:#fff;box-shadow:0 22px 44px rgba(15,40,20,.28);aspect-ratio:4/3.4;max-width:100%}
 .photo img{width:100%;height:100%;object-fit:contain;background:#fff;transition:transform 1.6s ease-in-out;display:block}
+.pnav{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:46px;height:46px;border-radius:50%;border:0;background:rgba(255,255,255,.88);color:var(--ink);display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.25)}
+.pnav svg{width:24px;height:24px}
+.pnav.prev{left:10px}.pnav.next{right:10px}
+.pnav:hover{background:#fff}
+.pdots{position:absolute;left:0;right:0;bottom:10px;z-index:3;display:flex;justify-content:center;gap:8px;pointer-events:none}
+.pdots i{width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.55);box-shadow:0 0 0 1.5px rgba(0,0,0,.25)}
+.pdots i.on{background:#fff;transform:scale(1.15)}
+.photo.locked .pnav,.photo.locked .pdots{display:none}
+.bigphoto .pwrap{position:relative}
+.pcount{position:absolute;right:10px;top:10px;z-index:3;background:var(--ink);color:#fff;border-radius:999px;padding:.15em .75em;font-weight:900;font-size:15px}
 .photo .num{position:absolute;left:10px;top:10px;background:var(--ink);color:#fff;border-radius:999px;padding:.2em .8em;font-weight:900;font-size:17px;font-variant-numeric:tabular-nums}
 .hpanel{padding:clamp(18px,2.4vw,30px);display:flex;flex-direction:column;gap:14px}
 .hpanel h2{margin:0;font-family:var(--f-hand);font-weight:700;font-size:clamp(28px,3vw,40px);line-height:1.2}
@@ -311,13 +321,13 @@ table.cr th{color:var(--ink)}
     <div class="stage">
       <div class="poster">
         <div class="p-head shadow-txt"><div class="hi">hi.</div><div class="stack"><span class="outline">猜猜看，我是</span><span class="tall">哪一種狗？</span></div></div>
-        <div class="photo"><img id="qImg" alt="猜猜這是什麼狗"><span class="num" id="qNum">1 / 21</span></div>
+        <div class="photo" id="qPhoto"><img id="qImg" alt="猜猜這是什麼狗"><span class="num" id="qNum">1 / 21</span><button class="pnav prev" data-pn="-1" aria-label="上一張照片"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M15 5l-7 7 7 7"/></svg></button><button class="pnav next" data-pn="1" aria-label="下一張照片"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg></button><div class="pdots" id="qDots"></div></div>
       </div>
       <div class="hpanel panel">
         <h2>按一個按鈕，打開一個提示</h2>
         <div class="hint-btns" id="hintBtns"></div>
         <ul class="hints" id="hintList"></ul>
-        <p class="tip" id="emptyTip">小技巧：先請大家說說「牠是大狗還是小狗？什麼顏色？」再打開第一個提示。<br>鍵盤：<span class="kbd">空白鍵</span> 下一個提示　<span class="kbd">Enter</span> 揭曉　<span class="kbd">→</span> 下一隻</p>
+        <p class="tip" id="emptyTip">小技巧：先請大家說說「牠是大狗還是小狗？什麼顏色？」再打開第一個提示。<br>鍵盤：<span class="kbd">空白鍵</span> 下一個提示　<span class="kbd">Enter</span> 揭曉　<span class="kbd">→</span> 下一隻　<span class="kbd">P</span> 換照片</p>
         <hr class="dots">
         <div class="reveal-row">
           <button class="btn" id="revealBtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5C7 4.5 2.7 7.6 1 12c1.7 4.4 6 7.5 11 7.5s9.3-3.1 11-7.5c-1.7-4.4-6-7.5-11-7.5zm0 12.5a5 5 0 110-10 5 5 0 010 10zm0-8a3 3 0 100 6 3 3 0 000-6z"/></svg>揭曉答案</button>
@@ -470,8 +480,8 @@ table.cr th{color:var(--ink)}
 </div>
 
 <audio id="aud" preload="none"></audio>
-<script src="data/dogs.js"></script>
-<script src="data/media.js"></script>
+<script src="data/dogs.js?v=5"></script>
+<script src="data/media.js?v=5"></script>
 <script>
 (function(){
 "use strict";
@@ -483,8 +493,12 @@ const host=location.hostname;
 const CAN_EMBED=/github\.io$/.test(host)||host==="localhost"||host==="127.0.0.1";
 const SIZE={small:"小型犬",medium:"中型犬",large:"大型犬"};
 const img=k=>"assets/img/"+k+".jpg";
-const HEAD={akita:[0.43,0.25,0.22],basenji:[0.78,0.22,0.26],beagle:[0.17,0.33,0.25],bichon:[0.66,0.33,0.32],border:[0.81,0.22,0.28],chihuahua:[0.25,0.23,0.26],corgi:[0.33,0.4,0.22],dachshund:[0.78,0.27,0.3],dalmatian:[0.62,0.22,0.38],frenchie:[0.35,0.37,0.32],golden:[0.87,0.19,0.22],gsd:[0.17,0.26,0.22],husky:[0.86,0.23,0.2],lab:[0.16,0.26,0.22],mutt:[0.46,0.33,0.47],pom:[0.26,0.3,0.27],poodle:[0.79,0.48,0.25],pug:[0.21,0.21,0.37],schnauzer:[0.28,0.32,0.24],shiba:[0.29,0.26,0.22],taiwan:[0.26,0.45,0.27]};
-const FOCUS={akita:"43% 25%",basenji:"78% 22%",beagle:"17% 33%",bichon:"66% 33%",border:"81% 22%",chihuahua:"25% 23%",corgi:"33% 40%",dachshund:"78% 27%",dalmatian:"62% 22%",frenchie:"35% 37%",golden:"87% 19%",gsd:"17% 26%",husky:"86% 23%",lab:"16% 26%",mutt:"46% 33%",pom:"26% 30%",poodle:"79% 48%",pug:"21% 21%",schnauzer:"28% 32%",shiba:"29% 26%",taiwan:"26% 45%"};
+const HEAD={akita:[0.43,0.25,0.22],basenji:[0.78,0.22,0.26],beagle:[0.17,0.33,0.25],bichon:[0.66,0.33,0.32],border:[0.81,0.22,0.28],chihuahua:[0.25,0.23,0.26],corgi:[0.33,0.4,0.22],dachshund:[0.78,0.27,0.3],dalmatian:[0.62,0.22,0.38],frenchie:[0.35,0.37,0.32],golden:[0.87,0.19,0.22],gsd:[0.17,0.26,0.22],husky:[0.86,0.23,0.2],lab:[0.16,0.26,0.22],mutt:[0.46,0.33,0.47],pom:[0.26,0.3,0.27],poodle:[0.63,0.33,0.55],pug:[0.21,0.21,0.37],schnauzer:[0.28,0.32,0.24],shiba:[0.29,0.26,0.22],taiwan:[0.26,0.45,0.27]};
+const FOCUS={akita:"43% 25%",basenji:"78% 22%",beagle:"17% 33%",bichon:"66% 33%",border:"81% 22%",chihuahua:"25% 23%",corgi:"33% 40%",dachshund:"78% 27%",dalmatian:"62% 22%",frenchie:"35% 37%",golden:"87% 19%",gsd:"17% 26%",husky:"86% 23%",lab:"16% 26%",mutt:"46% 33%",pom:"26% 30%",poodle:"63% 33%",pug:"21% 21%",schnauzer:"28% 32%",shiba:"29% 26%",taiwan:"26% 45%"};
+const pics=k=>[img(k),...((M[k]&&M[k].more)||[]).map((_,i)=>"assets/img/"+k+"-"+(i+2)+".jpg")];
+const credits=k=>[M[k].img,...(M[k].more||[])];
+const ARR=d=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"><path d="${d<0?"M15 5l-7 7 7 7":"M9 5l7 7-7 7"}"/></svg>`;
+const dots=(n,i)=>Array.from({length:n},(_,j)=>`<i class="${j===i?"on":""}"></i>`).join("");
 const fp=k=>` style="object-position:${FOCUS[k]||"center"}"`;
 const ICON_EXT='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5"/></svg>';
 const PLAY='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>', PAUSE='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';
@@ -563,10 +577,20 @@ const HINTS=[
   {k:"len",label:"名字",tag:"NAME 名字"},
 ];
 const cur=()=>D[st.list[st.pos]];
+function qNavSync(){
+  const k=cur().key, n=pics(k).length, lock=st.mode==="zoom"&&st.used.filter(x=>x!=="choice").length<6;
+  $("#qPhoto").classList.toggle("locked",lock||n<2); $("#qDots").innerHTML=dots(n,st.pi||0);
+}
+function qPhoto(step){
+  const k=cur().key, L=pics(k); if($("#qPhoto").classList.contains("locked")) return;
+  st.pi=((st.pi||0)+step+L.length)%L.length;
+  const im=$("#qImg"); im.style.transition="none"; im.style.transform="none"; im.onload=null; im.src=L[st.pi]; qNavSync();
+}
+$$("#qPhoto .pnav").forEach(b=>b.onclick=e=>{e.stopPropagation();qPhoto(+b.dataset.pn)});
 function photoFx(){
   const im=$("#qImg"), n=st.used.filter(k=>k!=="choice").length;
   im.style.filter="none"; im.style.transformOrigin="0 0";
-  if(st.mode!=="zoom"||!im.naturalWidth){im.style.transform="none";return}
+  if(st.mode!=="zoom"||!im.naturalWidth||(st.pi||0)>0){im.style.transform="none";return}
   const bw=im.clientWidth, bh=im.clientHeight, r=Math.min(bw/im.naturalWidth,bh/im.naturalHeight);
   const cw=im.naturalWidth*r, ch=im.naturalHeight*r, ox=(bw-cw)/2, oy=(bh-ch)/2;
   const [hx,hy,hw]=HEAD[cur().key]||[.5,.4,.3];
@@ -577,7 +601,7 @@ function photoFx(){
 }
 
 function openQuiz(){
-  const d=cur(); st.used=[]; stopAudio();
+  const d=cur(); st.used=[]; st.pi=0; stopAudio(); qNavSync();
   const im=$("#qImg"); im.style.transition="none"; const fresh=!im.src.endsWith(img(d.key)); if(fresh) im.style.opacity=0; im.onload=()=>{im.style.transition="none";photoFx();void im.offsetWidth;im.style.opacity="";im.style.transition=""}; im.src=img(d.key); photoFx(); void im.offsetWidth; im.style.transition="";
   const prog=`${st.pos+1} / ${st.list.length}`;
   $("#qProg").textContent=prog; $("#qNum").textContent="第 "+prog;
@@ -602,7 +626,7 @@ function reveal(k){
   $("#hintList").appendChild(li);
   li.querySelectorAll(".choices button").forEach(c=>c.onclick=()=>{if(c.dataset.c===d.name){c.classList.add("right");setTimeout(showAnswer,700)}else c.classList.add("wrong")});
   li.scrollIntoView({block:"nearest",behavior:"smooth"});
-  photoFx();
+  photoFx(); qNavSync();
 }
 function choicesFor(d){
   const others=shuffle(D.filter(x=>x.key!==d.key)), pick=[d.name];
@@ -643,7 +667,7 @@ function showAnswer(){
     <div class="hi">hi.</div>
     <div class="stack"><div class="praise">${esc(praise)}</div><span class="outline">我的名字是</span><span class="tall">${esc(d.name)}</span><span class="en">${esc(d.en)}</span>${d.alias?`<div class="alias">也叫：${esc(d.alias)}</div>`:""}</div>
   </div>
-  <div class="bigphoto"><img src="${img(d.key)}" alt="${esc(d.name)}"><div class="quirk"><span class="ribbon">CUTE QUIRK 可愛小習慣</span><p>${esc(d.quirk)}</p></div></div>
+  <div class="bigphoto"><div class="pwrap"><img id="aImg" src="${img(d.key)}" alt="${esc(d.name)}">${pics(d.key).length>1?`<span class="pcount" id="aCount">1 / ${pics(d.key).length}</span><button class="pnav prev" data-an="-1" aria-label="上一張照片">${ARR(-1)}</button><button class="pnav next" data-an="1" aria-label="下一張照片">${ARR(1)}</button><div class="pdots" id="aDots">${dots(pics(d.key).length,0)}</div>`:""}</div><div class="quirk"><span class="ribbon">CUTE QUIRK 可愛小習慣</span><p>${esc(d.quirk)}</p></div></div>
   <div class="info">
     <div class="panel facts-grid">
       <div class="fcell"><span class="ribbon">HOME 老家</span><span class="v">${esc(d.origin)}</span></div>
@@ -677,9 +701,14 @@ function showAnswer(){
       <a class="chip" href="https://animal.moa.gov.tw/" target="_blank" rel="noopener">${ICON_EXT}領養代替購買</a>
     </div>
     <div class="vids">${m.yt.map(vidHTML).join("")}</div>
-    <p class="credit" style="margin-top:12px">照片：${esc(m.img.author)}，${lic}，<a href="${m.img.page}" target="_blank" rel="noopener">Wikimedia Commons</a></p>
+    <p class="credit" style="margin-top:12px" id="aCredit"></p>
   </div>
   <div class="ans-nav"><button class="btn line" id="aBack2">回到提示</button><button class="btn" id="aNext2">${st.pos<st.list.length-1?"下一隻狗狗":"看圖鑑"}</button></div>`;
+  st.ai=0; const aSet=i=>{const L=pics(d.key),C=credits(d.key);st.ai=(i+L.length)%L.length;$("#aImg").src=L[st.ai];
+    if($("#aCount")){$("#aCount").textContent=`${st.ai+1} / ${L.length}`;$("#aDots").innerHTML=dots(L.length,st.ai)}
+    const c=C[st.ai], l=c.licurl?`<a href="${c.licurl}" target="_blank" rel="noopener">${esc(c.lic)}</a>`:esc(c.lic);
+    $("#aCredit").innerHTML=`照片 ${st.ai+1}：${esc(c.author)}，${l}，<a href="${c.page}" target="_blank" rel="noopener">Wikimedia Commons</a>`};
+  aSet(0); $$("#ansBody [data-an]").forEach(b=>b.onclick=()=>aSet(st.ai+ +b.dataset.an)); st.aSet=aSet;
   wireVids("#ansBody"); icons();
   $("#aBack2").onclick=$("#aBack").onclick=()=>show("quiz");
   $("#aNext2").onclick=$("#aNext").onclick=()=>goNext();
@@ -705,7 +734,7 @@ wireVids("#sndVids");
 
 /* ---------- 來源表 ---------- */
 const B=window.BG_SRC; $("#bgCredit").innerHTML=`${esc(B.author)}，<a href="${B.licurl}" target="_blank" rel="noopener">${esc(B.lic)}</a>，<a href="${B.page}" target="_blank" rel="noopener">Commons</a>（已模糊處理）`;
-$("#imgTable").innerHTML="<tr><th>品種</th><th>攝影者</th><th>授權</th><th>原始檔案</th></tr>"+D.map(d=>{const i=M[d.key].img;return `<tr><td>${esc(d.name)}</td><td>${esc(i.author)}</td><td>${i.licurl?`<a href="${i.licurl}" target="_blank" rel="noopener">${esc(i.lic)}</a>`:esc(i.lic)}</td><td><a href="${i.page}" target="_blank" rel="noopener">Commons</a></td></tr>`}).join("");
+$("#imgTable").innerHTML="<tr><th>品種</th><th>攝影者</th><th>授權</th><th>原始檔案</th></tr>"+D.map(d=>credits(d.key).map((i,n)=>`<tr><td>${esc(d.name)} ${n+1}</td><td>${esc(i.author)}</td><td>${i.licurl?`<a href="${i.licurl}" target="_blank" rel="noopener">${esc(i.lic)}</a>`:esc(i.lic)}</td><td><a href="${i.page}" target="_blank" rel="noopener">Commons</a></td></tr>`).join("")).join("");
 $("#sndTable").innerHTML="<tr><th>錄音</th><th>錄音者</th><th>授權</th><th>原始檔案</th></tr>"+SND.map(s=>{const c=SS[s.key];return `<tr><td>${esc(s.title)}</td><td>${esc(c.author)}</td><td>${c.licurl?`<a href="${c.licurl}" target="_blank" rel="noopener">${esc(c.lic)}</a>`:esc(c.lic)}</td><td><a href="${c.page}" target="_blank" rel="noopener">Commons</a></td></tr>`}).join("");
 
 /* ---------- 鍵盤 ---------- */
@@ -716,6 +745,8 @@ addEventListener("keydown",e=>{
   else if(q&&e.key==="Enter"&&!e.target.closest("button")){e.preventDefault();showAnswer()}
   else if((q||a)&&e.key==="ArrowRight") goNext();
   else if(q&&e.key==="ArrowLeft") $("#qPrev").click();
+  else if(q&&(e.key==="p"||e.key==="P")) qPhoto(1);
+  else if(a&&(e.key==="p"||e.key==="P")&&st.aSet) st.aSet(st.ai+1);
   else if(e.key==="Escape") show("home");
 });
 

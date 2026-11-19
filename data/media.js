@@ -19,6 +19,22 @@ window.MEDIA={
     "title": "【從零開始養】台灣犬!唯一代表台灣的犬種!德爺居然會畏懼他!?長得像米克斯怎麼分辨?忠心護主救阿嬤的故事【許伯簡芝】",
     "ch": "許伯&簡芝—倉鼠人"
    }
+  ],
+  "more": [
+   {
+    "file": "File:Dog With Yellow Rapeseed (242833099).jpeg",
+    "author": "Cho Hsun Lu",
+    "lic": "CC BY 3.0",
+    "licurl": "https://creativecommons.org/licenses/by/3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Dog_With_Yellow_Rapeseed_(242833099).jpeg"
+   },
+   {
+    "file": "File:Formosa Appearance on face.JPG",
+    "author": "Stanley",
+    "lic": "Public domain",
+    "licurl": "",
+    "page": "https://commons.wikimedia.org/wiki/File:Formosa_Appearance_on_face.JPG"
+   }
   ]
  },
  "mutt": {
@@ -39,6 +55,22 @@ window.MEDIA={
     "id": "7CXy5gTLZuw",
     "title": "[奔跑吧，米克斯] 飛奔第二集～ 請以領養代替購買！",
     "ch": "WOW~ LaLaLa"
+   }
+  ],
+  "more": [
+   {
+    "file": "File:\"Owczarek dolnośląski\" ;-) (2026-06-19).jpg",
+    "author": "Olgierd Rudak",
+    "lic": "CC BY-SA 4.0",
+    "licurl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:%22Owczarek_dolno%C5%9Bl%C4%85ski%22_;-)_(2026-06-19).jpg"
+   },
+   {
+    "file": "File:100% Mutt.jpg",
+    "author": "Campodemaizdecolorado",
+    "lic": "CC BY-SA 4.0",
+    "licurl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:100%25_Mutt.jpg"
    }
   ]
  },
@@ -61,6 +93,22 @@ window.MEDIA={
     "title": "狗與鹿 ｜犬種的故事＃ 7 柴犬｜歷經一萬五千風霜的日本國犬，身價一夕暴增九千億",
     "ch": "mydeerdog狗與鹿"
    }
+  ],
+  "more": [
+   {
+    "file": "File:0O9A7873 拷贝.jpg",
+    "author": "Wantiin",
+    "lic": "CC BY-SA 4.0",
+    "licurl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:0O9A7873_%E6%8B%B7%E8%B4%9D.jpg"
+   },
+   {
+    "file": "File:1Shiba Inu Kazumi.jpg",
+    "author": "Maja Dumat",
+    "lic": "CC BY 2.0",
+    "licurl": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:1Shiba_Inu_Kazumi.jpg"
+   }
   ]
  },
  "akita": {
@@ -81,6 +129,22 @@ window.MEDIA={
     "id": "gP69mem4mOE",
     "title": "秋田犬全球暴紅 故鄉大館市大發秋田財│中視新聞 20181105",
     "ch": "中視新聞"
+   }
+  ],
+  "more": [
+   {
+    "file": "File:Akita Inu (male).jpg",
+    "author": "Azurfrog",
+    "lic": "CC BY 4.0",
+    "licurl": "https://creativecommons.org/licenses/by/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Akita_Inu_(male).jpg"
+   },
+   {
+    "file": "File:Akita Inu Face Daiju.jpg",
+    "author": "Jon Cano",
+    "lic": "CC BY-SA 4.0",
+    "licurl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Akita_Inu_Face_Daiju.jpg"
    }
   ]
  },
@@ -103,6 +167,22 @@ window.MEDIA={
     "title": "狗與鹿 ｜犬種的故事＃ 6 黃金獵犬 ＆ 拉布拉多｜血液裡流著溫柔的狗狗，一不小心就會把你融化的撫慰犬",
     "ch": "mydeerdog狗與鹿"
    }
+  ],
+  "more": [
+   {
+    "file": "File:3052-Golden-Retriever-2 (20505649281).jpg",
+    "author": "localpups",
+    "lic": "CC BY 2.0",
+    "licurl": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:3052-Golden-Retriever-2_(20505649281).jpg"
+   },
+   {
+    "file": "File:34th Annual World's Ugliest Dog Contest - Sarah Stierch 13.jpg",
+    "author": "Missvain",
+    "lic": "CC BY 4.0",
+    "licurl": "https://creativecommons.org/licenses/by/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:34th_Annual_World%27s_Ugliest_Dog_Contest_-_Sarah_Stierch_13.jpg"
+   }
   ]
  },
  "lab": {
@@ -123,6 +203,22 @@ window.MEDIA={
     "id": "Y7KMDOTrWK4",
     "title": "【公益】導盲犬!拉布拉多?訓練花費驚人?很缺幼犬寄養家庭?導盲杖跟導盲犬的差別?路上遇到怎麼辦?ft.水魔素、台灣導盲犬協會Guide Dog Association【許伯簡芝】",
     "ch": "許伯&簡芝—倉鼠人"
+   }
+  ],
+  "more": [
+   {
+    "file": "File:Apollo, big paws, on the front porch..jpg",
+    "author": "Ballparx",
+    "lic": "CC BY-SA 4.0",
+    "licurl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Apollo,_big_paws,_on_the_front_porch..jpg"
+   },
+   {
+    "file": "File:JEŻÓW dwór, fot. J. Nowostawska-Gyalókay MIK 2015 (6) (29867437272).jpg",
+    "author": "mik Krakow",
+    "lic": "CC BY-SA 2.0",
+    "licurl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:JE%C5%BB%C3%93W_dw%C3%B3r,_fot._J._Nowostawska-Gyal%C3%B3kay_MIK_2015_(6)_(29867437272).jpg"
    }
   ]
  },
@@ -145,6 +241,22 @@ window.MEDIA={
     "title": "狗與鹿 ｜犬種的故事＃5 柯基｜小精靈送給人類的禮物，英國皇室唯一指定吉祥物",
     "ch": "mydeerdog狗與鹿"
    }
+  ],
+  "more": [
+   {
+    "file": "File:2 year old male corgi.jpg",
+    "author": "Capersfish",
+    "lic": "CC0",
+    "licurl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "page": "https://commons.wikimedia.org/wiki/File:2_year_old_male_corgi.jpg"
+   },
+   {
+    "file": "File:2yearoldwelshcorgi.jpg",
+    "author": "Harrisj82",
+    "lic": "CC BY-SA 4.0",
+    "licurl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:2yearoldwelshcorgi.jpg"
+   }
   ]
  },
  "husky": {
@@ -166,15 +278,31 @@ window.MEDIA={
     "title": "「我要我媽咪」！哈士奇發音標準技驚網友｜三立新聞台",
     "ch": "三立新聞LIVE"
    }
+  ],
+  "more": [
+   {
+    "file": "File:3217-siberian-husky-dog (20314366700).jpg",
+    "author": "localpups",
+    "lic": "CC BY 2.0",
+    "licurl": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:3217-siberian-husky-dog_(20314366700).jpg"
+   },
+   {
+    "file": "File:3218-siberian-husky-dog (19881570453).jpg",
+    "author": "localpups",
+    "lic": "CC BY 2.0",
+    "licurl": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:3218-siberian-husky-dog_(19881570453).jpg"
+   }
   ]
  },
  "poodle": {
   "img": {
-   "file": "File:Toy Poodle Chocolat (3128772945).jpg",
-   "author": "Yasuhiko Ito from Sendai, Japan",
-   "lic": "CC BY 2.0",
-   "licurl": "https://creativecommons.org/licenses/by/2.0",
-   "page": "https://commons.wikimedia.org/wiki/File:Toy_Poodle_Chocolat_(3128772945).jpg"
+   "file": "File:KOTASTU.jpg",
+   "author": "Ume31",
+   "lic": "CC BY-SA 4.0",
+   "licurl": "https://creativecommons.org/licenses/by-sa/4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:KOTASTU.jpg"
   },
   "yt": [
    {
@@ -186,6 +314,22 @@ window.MEDIA={
     "id": "Bv-hMh1knKs",
     "title": "【從零開始養】巨大貴賓V.S茶杯貴賓!四種不同體型一次開箱!智商第二!許伯挑戰抱兩隻巨大貴賓!【許伯簡芝】",
     "ch": "許伯&簡芝—倉鼠人"
+   }
+  ],
+  "more": [
+   {
+    "file": "File:Gold Poodle.jpg",
+    "author": "Laliv g",
+    "lic": "CC BY-SA 4.0",
+    "licurl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Gold_Poodle.jpg"
+   },
+   {
+    "file": "File:Toy Poodle Chocolat (3128772945).jpg",
+    "author": "Yasuhiko Ito from Sendai, Japan",
+    "lic": "CC BY 2.0",
+    "licurl": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Toy_Poodle_Chocolat_(3128772945).jpg"
    }
   ]
  },
@@ -208,6 +352,22 @@ window.MEDIA={
     "title": "狗與鹿 ｜犬種的故事＃ 8 博美｜鐵達尼號上奇蹟獲救。小巧可愛拖慢人類科學進展200年？",
     "ch": "mydeerdog狗與鹿"
    }
+  ],
+  "more": [
+   {
+    "file": "File:Pomeranian dog standing.jpg",
+    "author": "willc2",
+    "lic": "CC BY-SA 2.0",
+    "licurl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Pomeranian_dog_standing.jpg"
+   },
+   {
+    "file": "File:Pomeranian profile.jpg",
+    "author": "Горбунова М.С.",
+    "lic": "CC BY-SA 4.0",
+    "licurl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Pomeranian_profile.jpg"
+   }
   ]
  },
  "chihuahua": {
@@ -228,6 +388,22 @@ window.MEDIA={
     "id": "MF60cODUpNM",
     "title": "【從零開始養】吉娃娃!被25隻包圍的體驗?世界最小狗?來自外星?【許伯簡芝】",
     "ch": "許伯&簡芝—倉鼠人"
+   }
+  ],
+  "more": [
+   {
+    "file": "File:0h, running Bucky.jpg",
+    "author": "Tim Massey",
+    "lic": "CC BY-SA 2.0",
+    "licurl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:0h,_running_Bucky.jpg"
+   },
+   {
+    "file": "File:Agradable sol dilan.jpg",
+    "author": "Oraxim",
+    "lic": "CC BY-SA 4.0",
+    "licurl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Agradable_sol_dilan.jpg"
    }
   ]
  },
@@ -250,6 +426,22 @@ window.MEDIA={
     "title": "【從零開始養】臘腸!體長那麼長的真正原因?最長臘腸多長?臘腸狗有木乃伊?臘腸也是獵犬?有的破壞力驚人?壽命超長?【許伯簡芝】Dachshund!dooooooooog!",
     "ch": "許伯&簡芝—倉鼠人"
    }
+  ],
+  "more": [
+   {
+    "file": "File:-2018-04-22- Cadu 08 (40923614074).jpg",
+    "author": "Romerito Pontes from São Carlos",
+    "lic": "CC BY 2.0",
+    "licurl": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:-2018-04-22-_Cadu_08_(40923614074).jpg"
+   },
+   {
+    "file": "File:-2024-09-22- Cadu e Amora - 001 (54013235165).jpg",
+    "author": "Romerito Pontes from São Carlos",
+    "lic": "CC BY 2.0",
+    "licurl": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:-2024-09-22-_Cadu_e_Amora_-_001_(54013235165).jpg"
+   }
   ]
  },
  "frenchie": {
@@ -270,6 +462,22 @@ window.MEDIA={
     "id": "8mUbqtUGSlI",
     "title": "【犬の系列】法國鬥牛犬  個性執著天然呆！養法鬥真的沒那麼簡單！French Bulldog｜熊爸估狗",
     "ch": "熊爸估狗"
+   }
+  ],
+  "more": [
+   {
+    "file": "File:Amy2.jpg",
+    "author": "Cotebasque.es",
+    "lic": "CC BY-SA 4.0",
+    "licurl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Amy2.jpg"
+   },
+   {
+    "file": "File:A French Bulldog.jpg",
+    "author": "Matt Wunderle",
+    "lic": "CC BY 2.0",
+    "licurl": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:A_French_Bulldog.jpg"
    }
   ]
  },
@@ -292,6 +500,22 @@ window.MEDIA={
     "title": "【從零開始養】養8隻巴哥的體驗?巴哥法鬥誰智商高?超像牡蠣?墳墓邊救援巴哥!【許伯簡芝】Pug",
     "ch": "許伯&簡芝—倉鼠人"
    }
+  ],
+  "more": [
+   {
+    "file": "File:2.5-year-old fawn male pug.jpg",
+    "author": "Abuk SABUK",
+    "lic": "CC BY-SA 3.0",
+    "licurl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:2.5-year-old_fawn_male_pug.jpg"
+   },
+   {
+    "file": "File:A pug on leash sits on sidewalk.jpg",
+    "author": "Nancy Wong",
+    "lic": "CC BY-SA 4.0",
+    "licurl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:A_pug_on_leash_sits_on_sidewalk.jpg"
+   }
   ]
  },
  "bichon": {
@@ -312,6 +536,22 @@ window.MEDIA={
     "id": "27O9_N4Vhi0",
     "title": "【比熊】微笑天使比熊犬，超級可愛粘人的狗狗，想養它的人一定要了解這些養寵知識",
     "ch": "寵物世界 Pet World"
+   }
+  ],
+  "more": [
+   {
+    "file": "File:Bichon Frise in Riga 1.jpg",
+    "author": "Томасина",
+    "lic": "CC BY-SA 3.0",
+    "licurl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bichon_Frise_in_Riga_1.jpg"
+   },
+   {
+    "file": "File:Bichon Frise Moletai May 2014.jpg",
+    "author": "Томасина",
+    "lic": "CC BY-SA 4.0",
+    "licurl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Bichon_Frise_Moletai_May_2014.jpg"
    }
   ]
  },
@@ -334,6 +574,22 @@ window.MEDIA={
     "title": "常見的雪納瑞3個品種分類",
     "ch": "Pets TV"
    }
+  ],
+  "more": [
+   {
+    "file": "File:AKC Miniature Schnauzer Dog Show 2013.jpg",
+    "author": "SheltieBoy",
+    "lic": "CC BY 2.0",
+    "licurl": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:AKC_Miniature_Schnauzer_Dog_Show_2013.jpg"
+   },
+   {
+    "file": "File:20080420 LunaHallett (cropped).jpg",
+    "author": "Matthallett",
+    "lic": "Public domain",
+    "licurl": "",
+    "page": "https://commons.wikimedia.org/wiki/File:20080420_LunaHallett_(cropped).jpg"
+   }
   ]
  },
  "border": {
@@ -354,6 +610,22 @@ window.MEDIA={
     "id": "kStGfsvZvj4",
     "title": "【從零開始養】邊境牧羊犬!狗界愛因斯坦!可以聽懂人類多少字?狗界舞王第三名!【許伯簡芝】Border Collie",
     "ch": "許伯&簡芝—倉鼠人"
+   }
+  ],
+  "more": [
+   {
+    "file": "File:20160428 dog border collie panting (cropped).jpg",
+    "author": "IketaniDaisei",
+    "lic": "CC BY-SA 4.0",
+    "licurl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:20160428_dog_border_collie_panting_(cropped).jpg"
+   },
+   {
+    "file": "File:0Q1A9876-2.jpg",
+    "author": "Kbx318",
+    "lic": "CC BY-SA 4.0",
+    "licurl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:0Q1A9876-2.jpg"
    }
   ]
  },
@@ -376,6 +648,22 @@ window.MEDIA={
     "title": "【超敏感！退休警犬犯職業病 聽「關鍵字」立刻警戒狠瞪】｜IG / daveywa / k9_odin_oshkosh",
     "ch": "台灣達人秀"
    }
+  ],
+  "more": [
+   {
+    "file": "File:19530700 Bernd vom Haus Jordan 776072 01.jpg",
+    "author": "Heinz Jürgen Wolf",
+    "lic": "CC BY-SA 4.0",
+    "licurl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:19530700_Bernd_vom_Haus_Jordan_776072_01.jpg"
+   },
+   {
+    "file": "File:1yearOldGermanShepherd.jpg",
+    "author": "Raghu mithinti at English Wikipedia",
+    "lic": "Public domain",
+    "licurl": "",
+    "page": "https://commons.wikimedia.org/wiki/File:1yearOldGermanShepherd.jpg"
+   }
   ]
  },
  "beagle": {
@@ -396,6 +684,22 @@ window.MEDIA={
     "id": "h2yvk5f4Ox4",
     "title": "【從零開始養】米格魯!史努比的原型?會偵測汽油?智商低卻是偵測犬?爆裂物搜查?【許伯簡芝】Beagle!屏科大-工作犬訓練中心",
     "ch": "許伯&簡芝—倉鼠人"
+   }
+  ],
+  "more": [
+   {
+    "file": "File:Beagle eating a dog cake.jpg",
+    "author": "Slyronit",
+    "lic": "CC BY-SA 4.0",
+    "licurl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Beagle_eating_a_dog_cake.jpg"
+   },
+   {
+    "file": "File:A Beagle sitting next to dog food.jpg",
+    "author": "Slyronit",
+    "lic": "CC BY-SA 4.0",
+    "licurl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:A_Beagle_sitting_next_to_dog_food.jpg"
    }
   ]
  },
@@ -418,6 +722,22 @@ window.MEDIA={
     "title": "大麥町犬如何判別合乎標準？由工作犬到受歡迎的寵物犬歷史",
     "ch": "狗狗毛毛友善"
    }
+  ],
+  "more": [
+   {
+    "file": "File:BIR Grupp- 6 DALMATINER, Mellanmöllan Honey Pie (24234227655).jpg",
+    "author": "Svenska Mässan from Sweden",
+    "lic": "CC BY 2.0",
+    "licurl": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:BIR_Grupp-_6_DALMATINER,_Mellanm%C3%B6llan_Honey_Pie_(24234227655).jpg"
+   },
+   {
+    "file": "File:Dalmatian dog.jpg",
+    "author": "Unknown authorUnknown author",
+    "lic": "Public domain",
+    "licurl": "",
+    "page": "https://commons.wikimedia.org/wiki/File:Dalmatian_dog.jpg"
+   }
   ]
  },
  "basenji": {
@@ -438,6 +758,22 @@ window.MEDIA={
     "id": "b0vyqjUCJ6s",
     "title": "What Does a Basenji Sound Like?",
     "ch": "Basenji Adventures"
+   }
+  ],
+  "more": [
+   {
+    "file": "File:A basenji.jpg",
+    "author": "PxHere",
+    "lic": "CC0",
+    "licurl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "page": "https://commons.wikimedia.org/wiki/File:A_basenji.jpg"
+   },
+   {
+    "file": "File:2008-05-01 a Basenji 03.jpg",
+    "author": "Niko Herlin",
+    "lic": "CC BY 2.0",
+    "licurl": "https://creativecommons.org/licenses/by/2.0",
+    "page": "https://commons.wikimedia.org/wiki/File:2008-05-01_a_Basenji_03.jpg"
    }
   ]
  }
